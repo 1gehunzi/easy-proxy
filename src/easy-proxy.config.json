@@ -1,0 +1,16 @@
+{
+  "proxy": {
+    "/api": {
+      "target": "<url>",
+      "changeOrigin": true
+    },
+    "/foo": {
+      "target": "<other_url>",
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/prod-api": ""
+      }
+    }
+  },
+  "port": 8888
+}
