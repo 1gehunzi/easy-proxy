@@ -24,10 +24,7 @@ const DEFAULT_CONFIG = {
 };
 
 const readEasyProxyConfig = () => {
-//   const configPath = path.join(__dirname, EASY_PROXY_CONFIG_NAME);
-const configPath = path.resolve(EASY_PROXY_CONFIG_NAME)
-
-  console.log('-------', path.resolve(configPath))
+  const configPath = path.resolve(EASY_PROXY_CONFIG_NAME);
   if (!fs.existsSync(path.resolve(configPath))) {
     throw new Error(ERROR_MESSAGES.NOT_FOUND_CONFIG_FILE);
   }

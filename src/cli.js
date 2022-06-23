@@ -1,6 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 const { program } = require("commander");
+const extPackageJson = require('../package.json')
+
 const {
   readEasyProxyConfig,
   DEFAULT_CONFIG,
@@ -8,7 +10,7 @@ const {
 } = require("./utils");
 const { startServer } = require("./server");
 
-program.version("1.0.0", "-v, --version");
+program.version(extPackageJson.version, "-v, --version");
 
 program
   .command("init")
@@ -33,4 +35,14 @@ program
     startServer(config);
   });
 
+program.description("Run mock server")
+.action(() => {
+    const config = readEasyProxyConfig();
+    startServer(config);
+  });
+
+
 program.parse(process.argv);
+
+// const config = readEasyProxyConfig();
+// startServer(config);
