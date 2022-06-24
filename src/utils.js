@@ -23,8 +23,7 @@ const DEFAULT_CONFIG = {
   port: 8888,
 };
 
-const readEasyProxyConfig = () => {
-  const configPath = path.resolve(EASY_PROXY_CONFIG_NAME);
+const readEasyProxyConfig = (configPath = EASY_PROXY_CONFIG_NAME) => {
   if (!fs.existsSync(path.resolve(configPath))) {
     throw new Error(ERROR_MESSAGES.NOT_FOUND_CONFIG_FILE);
   }

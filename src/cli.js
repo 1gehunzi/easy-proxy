@@ -37,12 +37,11 @@ program
 
 program.description("Run mock server")
 .action(() => {
-    const config = readEasyProxyConfig();
+    const config = readEasyProxyConfig(path.resolve(process.execPath, '../easy-proxy.config.json'));
     startServer(config);
+
+    console.log('浏览器访问以下地址：', 'http://localhost:8888')
   });
 
 
 program.parse(process.argv);
-
-// const config = readEasyProxyConfig();
-// startServer(config);

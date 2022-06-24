@@ -36,7 +36,7 @@ const buildZip = (src, dist, platform, zipFilename) => {
   const archive = archiver('zip')
   archive.pipe(output)
   // archive.directory(src, false)
-  archive.append(fs.createReadStream(`${src}/${fileName}`), { name: fileName });
+  archive.append(fs.createReadStream(`${src}/${fileName}`), { name: fileName, mode: 0o766 });
   archive.append(fs.createReadStream(`easy-proxy.config.json`), { name: 'easy-proxy.config.json' })
   archive.finalize()
 }
