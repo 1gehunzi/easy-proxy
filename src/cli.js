@@ -1,8 +1,11 @@
 const fs = require("fs");
 const path = require("path");
 const { program } = require("commander");
-const extPackageJson = require('../package.json')
-const open = require('open');
+const extPackageJson = require("../package.json");
+const open = require("open");
+const chalk = require("chalk");
+
+const log = console.log;
 
 const {
   readEasyProxyConfig,
@@ -35,19 +38,27 @@ program
   .action(() => {
     const file = path.resolve(process.cwd(), `./${EASY_PROXY_CONFIG_NAME}`);
 
-    console.log('file---', file)
+    console.log("file---", file);
     const config = readEasyProxyConfig(file);
-    startServer(config);
-  });
 
-program.description("Run mock server")
-.action(() => {
-    const config = readEasyProxyConfig(path.resolve(process.execPath, '../easy-proxy.config.json'));
+    const link = `http://localhost:${config.port}`;
     startServer(config);
 
-    // console.log('浏览器访问以下地址：', 'http://localhost:8888')
-    open('http://localhost:8888')
+    open(link);
+    // console.log(linkifyTerminal("proxy link: " + link, {pretty: true}));
+    //  console.log(linkifyTerminal(`proxy link: ${link}  --Carlos`, {pretty: true}));
+      console.log("proxy link:", chalk.blueBright.underline(link));
   });
 
+program.description("Run mock server").action(() => {
+  const config = readEasyProxyConfig(
+    path.resolve(process.execPath, "../easy-proxy.config.json")
+  );
+  startServer(config);
+  const link = `http://localhost:${config.port}`;
+  open(link);
+  console.log("proxy link:", chalk.blueBright.underline(link));
+  // console.log(linkifyTerminal(`proxy link: ${link} --Carlos`, {pretty: true}));
+});
 
 program.parse(process.argv);

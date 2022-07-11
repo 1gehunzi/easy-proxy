@@ -8,12 +8,20 @@ const startServer = (config) => {
   Object.keys(proxy).forEach((key) => {
     const proxyItem = proxy[key];
     console.log(proxyItem);
-    app.use(key, createProxyMiddleware({...proxyItem,
-      onProxyReq: (proxyReq, req, res) => {
-        // add custom header to request
-        proxyReq.setHeader('cookie', cookie);
-      }
-    }));    
+    app.use(
+      key,
+      createProxyMiddleware({
+        ...proxyItem,
+        onProxyReq: (proxyReq, req, res) => {
+          // add custom header to request
+          proxyReq.setHeader("cookie", cookie);
+        },
+
+        onProxyRes: (proxyRes, req, res) => {
+          proxyRes.headers["Access-Control-Allow-Origin"] = "*";
+        },
+      })
+    );
   });
 
   app.listen(port);
