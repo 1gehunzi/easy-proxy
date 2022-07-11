@@ -1,7 +1,7 @@
 # easy-proxy
-
+超简单的代理
 ## TODO List
-[ ] 解决 cookie 问题
+[x] 解决 cookie 问题
 
 [ ] 自动端口号
 
