@@ -7,7 +7,7 @@
     "easy-proxy": "src/cli.js"
   },
   "scripts": {
-    "dev": "node src/cli.js",
+    "dev": "node src/cli.js run",
     "build": "npx pkg src/cli.js --out-path dist && npm run zip",
     "zip": "node scripts/build-zip.js"
   },
