@@ -28,11 +28,14 @@ program
     }
   });
 
+// 本地开发测试 node src/cli.js run
 program
   .command("run")
   .description("Run mock server")
   .action(() => {
     const file = path.resolve(process.cwd(), `./${EASY_PROXY_CONFIG_NAME}`);
+
+    console.log('file---', file)
     const config = readEasyProxyConfig(file);
     startServer(config);
   });
