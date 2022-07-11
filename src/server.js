@@ -1,7 +1,10 @@
 // index.js
 const express = require("express");
 const { createProxyMiddleware } = require("http-proxy-middleware");
+const cors = require('cors')
+
 const app = express(); // app 就是一个应用
+app.use(cors())
 
 const startServer = (config) => {
   const { proxy, port, cookie } = config;
@@ -15,10 +18,11 @@ const startServer = (config) => {
         onProxyReq: (proxyReq, req, res) => {
           // add custom header to request
           proxyReq.setHeader("cookie", cookie);
+          
         },
 
         onProxyRes: (proxyRes, req, res) => {
-          proxyRes.headers["Access-Control-Allow-Origin"] = "*";
+          
         },
       })
     );
