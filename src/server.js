@@ -4,11 +4,16 @@ const { createProxyMiddleware } = require("http-proxy-middleware");
 const app = express(); // app 就是一个应用
 
 const startServer = (config) => {
-  const { proxy, port } = config;
+  const { proxy, port, cookie } = config;
   Object.keys(proxy).forEach((key) => {
     const proxyItem = proxy[key];
     console.log(proxyItem);
-    app.use(key, createProxyMiddleware(proxyItem));
+    app.use(key, createProxyMiddleware({...proxyItem,
+      onProxyReq: (proxyReq, req, res) => {
+        // add custom header to request
+        proxyReq.setHeader('cookie', cookie);
+      }
+    }));    
   });
 
   app.listen(port);

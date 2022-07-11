@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-
+ 
 const EASY_PROXY_CONFIG_NAME = "easy-proxy.config.json";
 const ERROR_MESSAGES = {
   NOT_FOUND_CONFIG_FILE: `Cannot found config file ${EASY_PROXY_CONFIG_NAME}`,
@@ -20,6 +20,7 @@ const DEFAULT_CONFIG = {
       },
     },
   },
+  cookie: "",
   port: 8888,
 };
 

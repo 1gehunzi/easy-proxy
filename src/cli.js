@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const { program } = require("commander");
 const extPackageJson = require('../package.json')
+const open = require('open');
 
 const {
   readEasyProxyConfig,
@@ -31,7 +32,8 @@ program
   .command("run")
   .description("Run mock server")
   .action(() => {
-    const config = readEasyProxyConfig();
+    const file = path.resolve(process.cwd(), `./${EASY_PROXY_CONFIG_NAME}`);
+    const config = readEasyProxyConfig(file);
     startServer(config);
   });
 
@@ -40,7 +42,8 @@ program.description("Run mock server")
     const config = readEasyProxyConfig(path.resolve(process.execPath, '../easy-proxy.config.json'));
     startServer(config);
 
-    console.log('浏览器访问以下地址：', 'http://localhost:8888')
+    // console.log('浏览器访问以下地址：', 'http://localhost:8888')
+    open('http://localhost:8888')
   });
 
 

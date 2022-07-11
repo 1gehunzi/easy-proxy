@@ -1,16 +1,17 @@
 {
   "proxy": {
     "/api": {
-      "target": "<url>",
-      "changeOrigin": true
-    },
-    "/foo": {
-      "target": "<other_url>",
+      "target": "http://192.168.129.85:7000/",
       "changeOrigin": true,
       "pathRewrite": {
-        "^/prod-api": ""
+        "^/api": ""
       }
+    },
+    "/": {
+      "target": "http://option.odts-dev.cicc.io/",
+      "changeOrigin": true
     }
   },
+  "cookie": "odtsrm%20eyJ0eXBlIjoiaWRfdG9rZW4iLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3d3dy5jaWNjLmNvbSIsInN1YiI6Ijk5OTkwMTAxIiwidXNlcm5hbWUiOiJJbml0QWRtaW4ifQ.beWUcjG4Ze-wbfhs3sXwhBVIcIH6RAiLu-GKZvul5zI",
   "port": 8888
 }
