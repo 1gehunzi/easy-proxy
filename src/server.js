@@ -19,11 +19,7 @@ const startServer = (config) => {
           // add custom header to request
           proxyReq.setHeader("cookie", cookie);
           
-        },
-
-        onProxyRes: (proxyRes, req, res) => {
-          
-        },
+        }
       })
     );
   });
