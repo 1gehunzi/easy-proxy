@@ -7,7 +7,7 @@ const app = express(); // app 就是一个应用
 app.use(cors())
 
 const startServer = (config) => {
-  const { proxy, port, cookie } = config;
+  const { proxy, port, headers } = config;
   Object.keys(proxy).forEach((key) => {
     const proxyItem = proxy[key];
     console.log(proxyItem);
@@ -16,9 +16,9 @@ const startServer = (config) => {
       createProxyMiddleware({
         ...proxyItem,
         onProxyReq: (proxyReq, req, res) => {
-          // add custom header to request
-          proxyReq.setHeader("cookie", cookie);
-          
+          Object.keys(headers).forEach(key => {
+            proxyReq.setHeader("key", headers[key]);
+          })
         }
       })
     );
