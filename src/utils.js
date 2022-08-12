@@ -1,7 +1,8 @@
 const fs = require("fs");
 const path = require("path");
- 
-const EASY_PROXY_CONFIG_NAME = "easy-proxy.config.json";
+const yaml = require('js-yaml');
+
+const EASY_PROXY_CONFIG_NAME = "easy-proxy.yml";
 const ERROR_MESSAGES = {
   NOT_FOUND_CONFIG_FILE: `Cannot found config file ${EASY_PROXY_CONFIG_NAME}`,
 };
@@ -28,7 +29,8 @@ const readEasyProxyConfig = (configPath = EASY_PROXY_CONFIG_NAME) => {
   if (!fs.existsSync(path.resolve(configPath))) {
     throw new Error(ERROR_MESSAGES.NOT_FOUND_CONFIG_FILE);
   }
-  return require(configPath);
+   const doc = yaml.load(fs.readFileSync(configPath, 'utf8'));
+  return doc;
 };
 
 module.exports = {

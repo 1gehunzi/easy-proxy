@@ -1,0 +1,16 @@
+proxy:
+  # 后端路由
+  "/api":
+    target: http://localhost:8088/
+    changeOrigin: true
+    secure: false
+    pathRewrite:
+      "^/api": ''
+  "/": 
+    # 换成自己的前端地址试试
+    target: https://github.com/
+    changeOrigin: true
+    secure: false
+port: 8888
+# headers:
+#   Authorization: 替换成你们自己的 token
